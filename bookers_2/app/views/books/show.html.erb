@@ -1,0 +1,51 @@
+<body>
+ <main>
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  <div class="container px-5 px-sm-0">
+   <div class="row">
+    <div class="col-md-3">
+     <%= render "users/list",user:@user,book:@book %>
+
+    </div>
+     <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <tbody>
+       <table class="table">
+        <td><%=link_to user_path(@user.id) do %>
+          　 <%= attachment_image_tag @book.user,:profile_image,format: 'jpeg',fallback: "no_image.jpg",size: "100x100" %>
+            <% end %></br>
+            <%= link_to @user.name,user_path(@user) %></td>
+        <td><%= link_to @book.title,book_path(@book) %></td>
+        <td><%= @book.body %></td>
+     
+        <td><%="コメント数: #{@book.book_comments.count}" %></td>
+          
+        <% if @user.id == current_user.id %>
+        <td><%= link_to "Edit",edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
+        <td><%= link_to "Destroy", book_path(@book), class: "btn btn-sm btn-danger", method: :delete, data: {confirm: "本当に消しますか？"} %></td>
+        <% end %>
+       </table>
+       <div>
+        <% @book.book_comments.each do |book_comment|%>
+         <p><%= attachment_image_tag @book.user,:profile_image,format: 'jpeg',fallback: "no_image.jpg",size: "100x100" %></p>
+          <p><%= link_to book_comment.user.name %>
+          <%= book_comment.created_at.strftime('%Y/%m/%d') %><%= book_comment.comment %>
+          <% if book_comment.user == current_user %>
+           <div>
+             <%= link_to "Destroy", book_book_comment_path(book_comment.book,book_comment.id), class: "btn btn-sm btn-danger", method: :delete %>
+           </div>
+          <% end %></p>
+        <% end %>
+        </div>
+        <div>
+          <%= form_with(model:[@book, @book_comment], local: true) do |f| %>
+          <%= f.text_area :comment　%>
+          <%= f.submit "送信" %>
+        　<% end %>
+        </div>
+      </tbody>
+     </div>
+   </div>
+  </div>
+ </main>
+</body>
