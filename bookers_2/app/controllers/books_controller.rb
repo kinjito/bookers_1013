@@ -3,18 +3,14 @@ class BooksController < ApplicationController
   
    def index
     @books = Book.all
-    # books = Book.all
-    @book = Book.new 
+    @book = Book.new
     @user = User.new
    end
 
    def show
     @book = Book.find(params[:id])
     @book_comment = BookComment.new
-    # @user = User.new
-    # users = User.page(params[:page]).reverse_order
     @user = @book.user
-    # @userr = users
    end
 
    def edit
