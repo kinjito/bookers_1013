@@ -33,27 +33,9 @@
               <div id="comments_<%= @book.id %>">
                  <%= render 'book_comments/index', book: @book , book_comment: @book_comment %>
                </div>
-               <!--< % @book.book_comments.each do |book_comment|%>-->
-               <!-- <p>< %= attachment_image_tag book_comment.user, :profile_image,format: 'jpeg',fallback: "no_image.jpg",size: "100x100" %></p>-->
-               <!--  <p>< %= book_comment.comment %></p>-->
-               <!--  <p>< %= link_to book_comment.user.name %>-->
-               <!--  < % if book_comment.user == current_user %>-->
-               <!--   <div>-->
-               <!--     < %= link_to "Destroy", book_book_comment_path(book_comment.book,book_comment.id), class: "btn btn-sm btn-danger", method: :delete %>-->
-               <!--   </div>-->
-               <!--  < % end %></p>-->
-               <!--< % end %>-->
                 <div id="comment_form_<%= @book.id %>">
                  <%= render 'book_comments/comment_form', book: @book , book_comment: @book_comment %>
                 </div>
-
-
-               <!--<div id="comment_< %= @book.id %>">-->
-               <!--  < %= form_with model:[@book, @book_comment] do |f| %>-->
-               <!--    < %= f.text_area :comment, size:"90x5" %>-->
-               <!--    < %= f.submit "送信" %>-->
-               <!--  < % end %>-->
-               <!--</div>-->
       </tbody>
      </div>
    </div>
